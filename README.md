@@ -1,6 +1,6 @@
 # liri-node-app
 
-# About
+## About
 This is a command-line node app. To use, in the terminal type
 ```
 node liri.js <command> <argument>
