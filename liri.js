@@ -37,6 +37,7 @@ function recentTweets() {
         tweets.forEach(t => {
           log(t.created_at);
           log(t.text);
+          log('');
         });
       }).catch(e => {
         if(e) throw e;
@@ -48,10 +49,10 @@ function songInfo(name) {
   spotify.search({type: 'track', query: name, limit: 20})
       .then(data => {
         data.tracks.items.forEach(i => {
-          log(i.artists[0].name);
-          log(i.name);
-          log(i.preview_url);
-          log(i.album.name);
+          log('Artist: ' + i.artists[0].name);
+          log('Name: ' + i.name);
+          log('URL: ' + i.preview_url);
+          log('Album: ' + i.album.name);
           log('');
         })
       }).catch(e => {
@@ -70,15 +71,14 @@ function movieInfo(title) {
     },
     json: true
   }).then(response => {
-    // log(response);
-    log(response.Title);
-    log(response.Year);
-    log(response.Ratings[0]);
-    log(response.Ratings[1]);
-    log(response.Country);
-    log(response.Language);
-    log(response.Plot);
-    log(response.Actors);
+    log('Title: ' + response.Title);
+    log('Year: ' + response.Year);
+    log(response.Ratings[0].Source + ": " + response.Ratings[0].Value);
+    log(response.Ratings[1].Source + ": " + response.Ratings[1].Value);
+    log('Country: ' + response.Country);
+    log('Languages: ' + response.Language);
+    log('Plot: ' + response.Plot);
+    log('Actors: ' + response.Actors);
   }).catch(e => {
     if(e) throw e;
   })
@@ -91,4 +91,6 @@ function runCmdFromFile() {
   })
 }
 
-runCommand(process.argv[2], process.argv.splice(3).join(" "));
+// run command line argument
+[,,cmd, ...arg] = process.argv;
+runCommand(cmd, arg.join(' '));
