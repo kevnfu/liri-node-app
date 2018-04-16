@@ -88,7 +88,7 @@ function runCmdFromFile() {
   fs.readFile('random.txt', 'utf8', (err, data) => {
     [cmd, args] = data.split(',');
     runCommand(cmd, args);
-  })
+  });
 }
 
 // run command line argument
